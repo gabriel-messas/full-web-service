@@ -4,6 +4,7 @@ import { HttpModule } from '@nestjs/axios';
 import { DinosaurController } from './controller/dinosaur.controller';
 import { DinosaurService } from './service/dinosaur.service';
 import { DinosaurRepository } from './repository/dinosaur.repository';
+import { PrismaClient } from '@prisma/client';
 
 @Module({
     imports: [
@@ -14,7 +15,7 @@ import { DinosaurRepository } from './repository/dinosaur.repository';
     ],
     providers: [
         DinosaurService,
-        DinosaurRepository,
+        DinosaurRepository
     ],
     exports: [
         DinosaurService,
