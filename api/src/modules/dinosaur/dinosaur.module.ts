@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
 
-import { DinosaurController } from './controller';
-import { DinosaurRepository } from './repository';
-import { DinosaurService } from './service';
+import { DinosaurController } from './controller/dinosaur.controller';
+import { DinosaurService } from './service/dinosaur.service';
+import { DinosaurRepository } from './repository/dinosaur.repository';
 
 @Module({
     imports: [
@@ -14,7 +14,7 @@ import { DinosaurService } from './service';
     ],
     providers: [
         DinosaurService,
-        DinosaurRepository
+        DinosaurRepository,
     ],
     exports: [
         DinosaurService,

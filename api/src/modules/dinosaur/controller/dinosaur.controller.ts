@@ -1,8 +1,7 @@
 import { Controller, UseGuards, Get, Param, Post, Body, Patch } from '@nestjs/common';
 import { Dinosaur } from '@prisma/client';
-import { UpdateDinosaurDto } from '../dto/update-user.dto';
-import { DinosaurDto } from '../dto/user.dto';
-import { DinosaurService } from '../service/user.service';
+import { DinosaurDto } from '../dto/dinosaur.dto';
+import { DinosaurService } from '../service/dinosaur.service';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -28,9 +27,9 @@ export class DinosaurController {
     @ApiParam({ name: 'dinosaurId', description: 'Id of the dinosaur to retrieve' })
     @ApiOkResponse({ description: 'Dinosaur information' })
     findDinosaurById(
-        @Param('dinosaurId') dinosaurId: string,
+        @Param('dinosaurId') dinosaurId: number,
     ) {
-        return this.dinosaurService.getDinosaur(dinosaurId);
+        return this.dinosaurService.findById(dinosaurId);
     }
 
     @Post()
@@ -38,7 +37,7 @@ export class DinosaurController {
     createDinosaur(
         @Body() dinosaur: DinosaurDto,
     ): Promise<Dinosaur> {
-        return this.dinosaurService.createDinosaur(dinosaur);
+        return this.dinosaurService.create(dinosaur);
     }
 
     @Patch(':dinosaurId')
@@ -46,9 +45,9 @@ export class DinosaurController {
     @ApiParam({ name: 'dinosaurId', description: 'Id of the dinosaur to update' })
     @ApiOkResponse({ description: 'Updated dinosaur information' })
     updateDinosaur(
-        @Param('dinosaurId') dinosaurId: string,
-        @Body() dinosaur: UpdateDinosaurDto,
+        @Param('dinosaurId') dinosaurId: number,
+        @Body() dinosaur: DinosaurDto,
     ): Promise<Dinosaur> {
-        return this.dinosaurService.updateDinosaur(dinosaurId, dinosaur);
+        return this.dinosaurService.update(dinosaurId, dinosaur);
     }
 }
