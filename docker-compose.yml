@@ -14,7 +14,7 @@ services:
             - servers-network
         depends_on:
             - postgres
-            - mongo
+            - redis
 
     # PostgreSQL
     postgres:
