@@ -3,12 +3,14 @@ import { Module, forwardRef } from '@nestjs/common';
 import { JwtModuleOptions, JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { readFileSync } from 'fs';
-import { UserModule } from '../src/modules/user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { LocalStrategy } from './strategy/local.strategy';
 import { Algorithm } from 'jsonwebtoken';
+import { UserService } from '../src/modules/user/service/user.service';
+import { LocalLoginService } from './service/local-login.service';
+import { UserRepository } from '../src/modules/user/repository/user.repository';
 
 const {
     SEC_PRIVATE_KEY,
@@ -34,7 +36,6 @@ export const JWT_CONFIG: JwtModuleOptions = {
 @Module({
     imports: [
         HttpModule,
-        forwardRef(() => UserModule),
         JwtModule.register(JWT_CONFIG),
         PassportModule.register({ defaultStrategy: 'jwt' }),
     ],
@@ -43,6 +44,9 @@ export const JWT_CONFIG: JwtModuleOptions = {
         AuthService,
         JwtStrategy,
         LocalStrategy,
+		UserService,
+		UserRepository,
+		LocalLoginService
     ],
     exports: [
         AuthService,
