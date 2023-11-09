@@ -16,3 +16,10 @@ model Dinosaur {
 	name  	String
 	age  	Int
 }
+
+model User {
+	id    	 Int     @id @default(autoincrement())
+	name  	 String
+	username String  @unique
+	password String
+}
