@@ -4,11 +4,34 @@ import { Request } from 'express';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { JWT_CONFIG } from '../auth.module';
-import { AccessTokenPayload, AuthService } from '../auth.service';
+import { AuthService } from '../auth.service';
 
 export const jwtExtractors = ExtractJwt.fromExtractors([
     ExtractJwt.fromAuthHeaderAsBearerToken()
 ]);
+
+interface UserPayload {
+    id: number;
+}
+
+interface JwtMetadata {
+    /** Issued at */
+    iat: number;
+
+    /** Expiration time */
+    exp: number;
+
+    /** Audience */
+    aud: string;
+
+    /** Issuer */
+    iss: string;
+
+    /** Subject (user who issued) */
+    sub: string;
+}
+
+export type AccessTokenPayload = JwtMetadata & { user?: UserPayload };
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -24,6 +47,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     }
 
     async validate(req: Request, payload: AccessTokenPayload) {
+		console.log('payload', payload);
         if (!payload) {
             throw new UnauthorizedException();
         }

@@ -6,35 +6,7 @@ import * as bcrypt from "bcryptjs";
 import { UserDto } from '../modules/user/dto/user.dto';
 import { UserService } from '../modules/user/service/user.service';
 import { JWT_CONFIG } from './auth.module';
-
-interface UserPayload {
-    id: number;
-}
-
-interface JwtMetadata {
-    /** Issued at */
-    iat: number;
-
-    /** Expiration time */
-    exp: number;
-
-    /** Audience */
-    aud: string;
-
-    /** Issuer */
-    iss: string;
-
-    /** Subject (user who issued) */
-    sub: string;
-}
-
-interface BasePayloadData {
-    user?: UserPayload;
-}
-
-type AccessTokenPayloadData = BasePayloadData;
-
-export type AccessTokenPayload = JwtMetadata & AccessTokenPayloadData;
+import { AccessTokenPayload } from './strategy/jwt.strategy';
 
 export type IValidatedUser = User;
 
@@ -71,7 +43,7 @@ export class AuthService {
         };
     }
 
-    async validateUser(payload: BasePayloadData): Promise<IValidatedUser> {
+    async validateUser(payload: AccessTokenPayload): Promise<IValidatedUser> {
         const user: User = await this.userService.findById(payload.user.id);
 
         return {
