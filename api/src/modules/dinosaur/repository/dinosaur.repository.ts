@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { Dinosaur, PrismaClient } from '@prisma/client';
+import { Dinosaur } from '@prisma/client';
 import { DinosaurDto } from '../dto/dinosaur.dto';
+import { PrismaService } from '../../../prisma/prisma.service';
 
 @Injectable()
 export class DinosaurRepository {
 
     constructor(
-        private prisma: PrismaClient
+        private prisma: PrismaService
     ) { }
 	
 	async findAll(): Promise<Dinosaur[]> {
