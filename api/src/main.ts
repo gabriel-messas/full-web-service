@@ -23,6 +23,7 @@ async function bootstrap() {
             key: fs.readFileSync(SEC_PRIVATE_KEY),
         } : undefined,
     };
+
 	const app = await NestFactory.create<NestExpressApplication>(AppModule, nestAppOptions);
 
 	if (isProductionMode) {
