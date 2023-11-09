@@ -1,7 +1,7 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { Request } from 'express';
 
-import { IValidatedUser } from '../../auth/auth.service';
+import { IValidatedUser } from '../auth.service';
 
 export const ReqUser = createParamDecorator((data, ctx: ExecutionContext) => {
     const req = ctx.switchToHttp().getRequest<Request>();

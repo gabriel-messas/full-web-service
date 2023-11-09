@@ -1,7 +1,7 @@
 import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { LoginDto } from '../dto/login.dto';
 import * as bcrypt from 'bcryptjs';
-import { UserService } from '../../src/modules/user/service/user.service';
+import { UserService } from '../../modules/user/service/user.service';
 import { User } from '@prisma/client';
 
 @Injectable()

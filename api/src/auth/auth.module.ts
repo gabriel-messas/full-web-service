@@ -8,9 +8,9 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { LocalStrategy } from './strategy/local.strategy';
 import { Algorithm } from 'jsonwebtoken';
-import { UserService } from '../src/modules/user/service/user.service';
+import { UserService } from '../modules/user/service/user.service';
 import { LocalLoginService } from './service/local-login.service';
-import { UserRepository } from '../src/modules/user/repository/user.repository';
+import { UserRepository } from '../modules/user/repository/user.repository';
 
 const {
     SEC_PRIVATE_KEY,

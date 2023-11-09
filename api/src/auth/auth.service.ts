@@ -1,10 +1,10 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcryptjs';
+import * as bcrypt from "bcryptjs";
 
-import { UserDto } from '../src/modules/user/dto/user.dto';
-import { UserService } from '../src/modules/user/service/user.service';
+import { UserDto } from '../modules/user/dto/user.dto';
+import { UserService } from '../modules/user/service/user.service';
 import { JWT_CONFIG } from './auth.module';
 
 interface UserPayload {
@@ -52,7 +52,7 @@ export class AuthService {
             throw new BadRequestException('Username already registered');
         }
 
-		createUserDto.password = await bcrypt.hash(createUserDto.password);
+		createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
 
         return this.userService.create(createUserDto);
     }

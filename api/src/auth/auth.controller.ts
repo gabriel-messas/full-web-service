@@ -2,7 +2,7 @@ import { Controller, Logger, Post, Body, UseGuards, Res } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOperation, ApiBody, ApiOkResponse } from '@nestjs/swagger';
 import { AuthService, IValidatedUser } from './auth.service';
-import { UserDto } from '../src/modules/user/dto/user.dto';
+import { UserDto } from '../modules/user/dto/user.dto';
 import { ReqUser } from './decorators/user.decorator';
 
 @Controller('auth')
