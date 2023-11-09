@@ -31,19 +31,14 @@ services:
         networks:
             - servers-network
 
-    mongo:
-        container_name: mongo-fws
-        image: mongo
-        hostname: mongo
-        environment:
-          MONGO_INITDB_ROOT_USERNAME: root
-          MONGO_INITDB_ROOT_PASSWORD: root
+    # Redis
+    redis:
+        container_name: redis-fws
+        image: redis
         ports:
-          - "27017:27017"
-        volumes:
-          - ./volumes/mongo-data:/data/db
+            - 6379:6379
         networks:
-          - servers-network
+            - servers-network
 
 networks:
     servers-network:
@@ -52,5 +47,3 @@ networks:
 volumes:
     # Postgres volume
     postgres-data:
-    # Mongo volume
-    mongo-data:
