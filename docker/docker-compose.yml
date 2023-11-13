@@ -3,13 +3,14 @@ services:
     # Api
     api:
         container_name: api-fws
-        build:
-            context: ./
-            dockerfile: Dockerfile.development
+        # build:
+            # context: ../api
+            # dockerfile: Dockerfile.development
+        image: gabrielmessas/api-fws-local
         ports:
             - 3000:3000
         volumes:
-            - ./api:/api
+            - ../api:/api
         networks:
             - servers-network
         depends_on:
