@@ -1,0 +1,2 @@
+1. Convert the docker-compose.yaml file to a (set of) Kubernetes-readable .yaml file(s) using Kompose (https://kompose.io/), by running kompose convert -o <out_directory>
+2. Create the resources in the Kubernetes cluster by running kubectl apply -f <out_directory>
