@@ -1,0 +1,16 @@
+apiVersion: v2
+appVersion: 1.0.0
+dependencies:
+- name: postgresql
+  repository: '@bitnami'
+  version: 11.6.19
+- name: minio
+  repository: '@minio'
+  version: 8.0.9
+- name: redis
+  repository: '@bitnami'
+  version: 17.0.5
+description: FWS Chart
+name: fws
+type: application
+version: 1.0.0

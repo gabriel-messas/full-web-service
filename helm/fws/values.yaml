@@ -1,0 +1,134 @@
+global:
+  production:
+  imagePullSecrets:
+    - fws-registry-gitlab-secret
+    - fws-registry-azure-secret
+  postgresql:
+    auth:
+      database: fws
+      username: fws
+      password: ""
+      postgresPassword: ""
+    servicePort: 5432
+  redis:
+    password:
+  url:
+    prod:
+      route: fws.net.br
+    dev:
+      route: fws.dev
+    appUrl: ""
+    appAdditionalUrls: []
+    apiUrl: ""
+
+production: false
+
+imageCredentials:
+  gitlab:
+    registry: registry.gitlab.com
+    username: fws
+    email: fws@fws.fws
+    password:
+  azure:
+    registry: azurecr.azurecr.io
+    username: fws
+    email: fws@fws.fws
+    password:
+
+api:
+  url:
+  image: fws.azurecr.io/api-fws
+  tag: latest
+  imagePullPolicy: Always
+  replicas: 1
+  resources:
+    requests:
+      cpu: "150m"
+      memory: "300Mi"
+    limits:
+      cpu: "300m"
+      memory: "500Mi"
+  jwt:
+    expiration: 15
+    refreshExpiration: 10080
+  vapid:
+    publicKey:
+    privateKey: ""
+
+url:
+  prod:
+    route: fws.net.br
+  dev:
+    route: fws.dev
+
+google:
+  auth:
+    id: 708247284879-jp7r3qk5pp4vdnoajibh2bn9n1njo6eb.apps.googleusercontent.com
+    secret: 
+
+sendgrid:
+  key: xxxxxx 
+
+extraValues:
+  api: {}
+
+extraSecret:
+  api: {}
+
+postgresql:
+  image:
+    registry: fws.azurecr.io
+    repository: bitnami/postgresql
+    tag: 13.1.0
+    pullPolicy: Always
+  service:
+    port: "5432"
+  auth:
+    database: fws
+    username: fws
+    password: 
+    postgresPassword: 
+  persistence:
+    enabled: true
+    storageClass: "default"
+    size: "1Gi"
+  resources:
+    requests:
+      cpu: "250m"
+      memory: "200Mi"
+    limits:
+      cpu: "400m"
+      memory: "500Mi"
+
+redis:
+  image:
+    registry: fws.azurecr.io
+    repository: bitnami/redis
+    tag: 6.0.10
+    pullPolicy: Always
+  architecture: standalone
+  auth:
+    password:
+  replica:
+    replicaCount: 0
+  master:
+    persistence:
+      storageClass: "default"
+      size: "1Gi"
+    resources:
+      requests:
+        cpu: "40m"
+        memory: "50Mi"
+      limits:
+        cpu: "100m"
+        memory: "150Mi"
+  commonConfiguration: |-
+    auto-aof-rewrite-percentage 10
+    auto-aof-rewrite-min-size 200mb
+    appendonly yes
+    save ""    
+
+security:
+  privateKey: ""
+  publicKey: ""
+  certificates:
