@@ -26,7 +26,7 @@ export const JWT_CONFIG: JwtModuleOptions = {
     privateKey: readFileSync(SEC_PRIVATE_KEY, 'utf8'),
     publicKey: readFileSync(SEC_PUBLIC_KEY, 'utf8'),
     signOptions: {
-		expiresIn: JWT_EXPIRATION_IN_SECONDS as unknown as number || 30 * 60,
+		expiresIn: Number(JWT_EXPIRATION_IN_SECONDS) || 30 * 60,
         algorithm,
         issuer: SSO_ISSUER || 'FWS',
         audience: JWT_AUDIENCE || 'FWS'
