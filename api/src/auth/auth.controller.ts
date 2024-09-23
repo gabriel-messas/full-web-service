@@ -41,7 +41,6 @@ export class AuthController {
     @ApiOkResponse({ description: 'Access JWT token' })
     async customLogin(
         @ReqUser() user: IValidatedUser,
-        @Res({ passthrough: true }) res: Response,
     ) {
         const { accessToken, expiresIn } = await this.authService.login(user);
 
